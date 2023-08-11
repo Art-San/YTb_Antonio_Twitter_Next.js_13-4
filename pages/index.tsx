@@ -1,8 +1,3 @@
-// import Image from 'next/image'
-// import { Inter } from 'next/font/google'
-
-// const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
-  return <div className=" text-3xl text-white">Hello World</div>
+  return <div className=" text-3xl text-sky-400">Hello World</div>
 }
