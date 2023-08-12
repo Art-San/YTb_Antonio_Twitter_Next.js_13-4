@@ -1,3 +1,5 @@
+import Button from '../Button'
+
 const FollwBar = () => {
   return (
     <div className=" px-6 py-4 hidden lg:block ">
