@@ -1,3 +1,4 @@
+import FollwBar from './Layout/FollwBar'
 import Sidebar from './Layout/Sidebar'
 
 interface ILayoutProps {
@@ -21,6 +22,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
           >
             {children}
           </div>
+          <FollwBar />
         </div>
       </div>
     </div>
