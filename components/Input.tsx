@@ -1,9 +1,12 @@
+//handleChange из 02.Frontend-10.Forms.Part_2 (fast-company)
 interface IInputProps {
   placeholder?: string
   value?: string
   type?: string
   disabled?: boolean
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: any
+  name?: string
+  // onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   label?: string
 }
 
@@ -13,13 +16,19 @@ const Input: React.FC<IInputProps> = ({
   type = 'text',
   onChange,
   disabled,
+  name,
   label
 }) => {
+  const handleChange = ({ target }: any) => {
+    onChange({ name: target.name, value: target.value })
+  }
+
   return (
     <input
       disabled={disabled}
-      onChange={onChange}
+      onChange={handleChange}
       value={value}
+      name={name}
       placeholder={placeholder}
       type={type}
       className="
@@ -44,3 +53,52 @@ const Input: React.FC<IInputProps> = ({
 }
 
 export default Input
+
+// РАБОЧИЙ вариант
+
+// interface IInputProps {
+//   placeholder?: string
+//   value?: string
+//   type?: string
+//   disabled?: boolean
+//   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+//   label?: string
+// }
+
+// const Input: React.FC<IInputProps> = ({
+//   placeholder,
+//   value,
+//   type = 'text',
+//   onChange,
+//   disabled,
+//   label
+// }) => {
+//   return (
+//     <input
+//       disabled={disabled}
+//       onChange={onChange}
+//       value={value}
+//       placeholder={placeholder}
+//       type={type}
+//       className="
+//       w-full
+//       p-4
+//       text-lg
+//       bg-black
+//       border-2
+//       border-neutral-800
+//       rounded-md
+//       outline-none
+//       text-white
+//       focus:border-sky-500
+//       focus:border-2
+//       transition
+//       disabled:bg-neutral-900
+//       disabled:opacity-70
+//       disabled:cursor-not-allowed
+//     "
+//     />
+//   )
+// }
+
+// export default Input
