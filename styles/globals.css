@@ -9,3 +9,7 @@
 body {
   @apply h-full bg-black;
 }
+
+.next-error-h1 {
+  color: white;
+}
