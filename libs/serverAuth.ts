@@ -6,7 +6,6 @@ import { getSession } from 'next-auth/react'
 
 const serverAuth = async (req: NextApiRequest) => {
   const session = await getSession({ req })
-  console.log('session', session)
 
   if (!session?.user?.email) {
     throw new Error('serverAuth: Not signed in - Не авторизован 1')
