@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import useUser from '@/hooks/useUser'
 // import useFollow from '@/hooks/useFollow'
-// import useEditModal from '@/hooks/useEditModal'
+import useEditModal from '@/hooks/useEditModal'
 
 import Button from '../Button'
 
@@ -16,9 +16,8 @@ interface IUserBioProps {
 const UserBio: React.FC<IUserBioProps> = ({ userId }) => {
   const { data: currentUser } = useCurrentUser()
   const { data: fetchedUser } = useUser(userId)
-  console.log('fetchedUser', fetchedUser)
 
-  //   const editModal = useEditModal()
+  const editModal = useEditModal()
 
   //   const { isFollowing, toggleFollow } = useFollow(userId)
 
@@ -34,9 +33,8 @@ const UserBio: React.FC<IUserBioProps> = ({ userId }) => {
     <div className="border-b-[1px] border-neutral-800 pb-4">
       <div className="flex justify-end p-2">
         {currentUser?.id === userId ? (
-          <Button secondary label="Edit" onClick={() => {}} />
+          <Button secondary label="Edit" onClick={editModal.onOpen} />
         ) : (
-          //   <Button secondary label="Edit" onClick={editModal.onOpen} />
           <Button
             onClick={() => {}}
             // onClick={toggleFollow}

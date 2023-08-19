@@ -3,7 +3,6 @@ import Avatar from '../Avatar'
 
 const FollwBar = () => {
   const { data: users = [] } = useUsers()
-  console.log('users.length', users)
 
   if (users.length === 0) {
     return null
