@@ -1,28 +1,27 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-import prisma from '@/libs/prismadb'
-import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import { getServerSession } from 'next-auth'
+import prisma from '@/libs/prismadb';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth';
 
 const serverAuth = async (req: NextApiRequest, res: NextApiResponse) => {
-  // const session = await getSession({ req })
-  const session = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session?.user?.email) {
-    throw new Error('serverAuth: Not signed in - Не авторизован 1')
-  }
+    throw new Error('Not signed in');
+  } 
 
   const currentUser = await prisma.user.findUnique({
     where: {
-      email: session.user.email
+      email: session.user.email,
     }
-  })
+  });
 
   if (!currentUser) {
-    throw new Error('serverAuth: Not signed in - Не авторизован 2')
+    throw new Error('Not signed in');
   }
 
-  return { currentUser }
-}
+  return { currentUser };
+};
 
-export default serverAuth
+export default serverAuth;

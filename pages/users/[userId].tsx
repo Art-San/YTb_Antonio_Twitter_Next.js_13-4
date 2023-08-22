@@ -1,22 +1,22 @@
-import { useRouter } from 'next/router'
-import { ClipLoader } from 'react-spinners'
-// import { MoonLoader } from 'react-spinners'
+import { useRouter } from "next/router";
+import { ClipLoader } from "react-spinners";
 
-import useUser from '@/hooks/useUser'
+import useUser from "@/hooks/useUser";
 
-import Header from '@/components/Header'
-import UserHero from '@/components/users/UserHero'
-import UserBio from '@/components/users/UserBio'
-import PostFeed from '@/components/posts/PostFeed'
+import PostFeed from "@/components/posts/PostFeed";
+import Header from "@/components/Header";
+import UserBio from "@/components/users/UserBio";
+import UserHero from "@/components/users/UserHero";
+
+
 
 const UserView = () => {
-  const router = useRouter()
-  const { userId } = router.query
+  const router = useRouter();
+  const { userId } = router.query;
 
-  const { data: fetchedUser, isLoading } = useUser(userId as string)
+  const { data: fetchedUser, isLoading } = useUser(userId as string);
 
   if (isLoading || !fetchedUser) {
-    //   if (true) {
     return (
       <div className="flex justify-center items-center h-full">
         <ClipLoader color="lightblue" size={80} />
@@ -31,7 +31,7 @@ const UserView = () => {
       <UserBio userId={userId as string} />
       <PostFeed userId={userId as string} />
     </>
-  )
+   );
 }
-
-export default UserView
+ 
+export default UserView;

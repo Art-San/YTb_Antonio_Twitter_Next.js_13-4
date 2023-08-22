@@ -1,108 +1,103 @@
-import axios from 'axios'
-import { useCallback, useState } from 'react'
-import toast from 'react-hot-toast'
-import { signIn } from 'next-auth/react'
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useCallback, useState } from "react";
+import { signIn } from 'next-auth/react';
 
-import useLoginModal from '@/hooks/useLoginModal'
-import useRegisterModal from '@/hooks/useRegisterModal'
+import useLoginModal from "@/hooks/useLoginModal";
+import useRegisterModal from "@/hooks/useRegisterModal";
 
-import Input from '../Input'
-import Modal from '../Modal'
+import Input from "../Input";
+import Modal from "../Modal";
 
 const RegisterModal = () => {
-  const loginModal = useLoginModal()
-  const registerModal = useRegisterModal()
+  const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
 
-  const [name, setName] = useState('')
-  const [username, setUserName] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const onToggle = useCallback(() => {
     if (isLoading) {
-      return
+      return;
     }
-
-    registerModal.onClose()
-    loginModal.onOpen()
-  }, [loginModal, registerModal, isLoading])
+  
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [loginModal, registerModal, isLoading]);
 
   const onSubmit = useCallback(async () => {
     try {
-      setIsLoading(true)
-
-      // TODO REDISTER AND LOG IN
+      setIsLoading(true);
+      
       await axios.post('/api/register', {
         email,
-        name,
+        password,
         username,
-        password
-      })
+        name,
+      });
 
       setIsLoading(false)
-      // 1:40:40
-      toast.success('Account created - Аккаунт создан.')
+
+      toast.success('Account created.');
 
       signIn('credentials', {
         email,
-        password
-      })
+        password,
+      });
 
-      registerModal.onClose()
+      registerModal.onClose();
     } catch (error) {
-      toast.error('Something went wrong - Что-то пошло не так')
+      toast.error('Something went wrong');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }, [registerModal, email, password, username, name])
+  }, [email, password, registerModal, username, name]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Input
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
         disabled={isLoading}
+        placeholder="Email" 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
       />
-      <Input
-        placeholder="Name"
-        onChange={(e) => setName(e.target.value)}
-        value={name}
+      <Input 
         disabled={isLoading}
+        placeholder="Name" 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
       />
-      <Input
-        placeholder="UserName"
-        onChange={(e) => setUserName(e.target.value)}
-        value={username}
+      <Input 
         disabled={isLoading}
+        placeholder="Username" 
+        value={username} 
+        onChange={(e) => setUsername(e.target.value)}
       />
-      <Input
-        placeholder="Password"
-        type="password"
+      <Input 
+        disabled={isLoading}
+        placeholder="Password" 
+        type="password" 
+        value={password} 
         onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        disabled={isLoading}
       />
     </div>
   )
 
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
-      <p>
-        Уже есть аккаунт?
-        <span
-          onClick={onToggle}
+      <p>Already have an account?
+        <span 
+          onClick={onToggle} 
           className="
-            text-white
-            cursor-pointer
+            text-white 
+            cursor-pointer 
             hover:underline
-            "
-        >
-          {' '}
-          Sign in
-        </span>
+          "
+          > Sign in</span>
       </p>
     </div>
   )
@@ -118,7 +113,7 @@ const RegisterModal = () => {
       body={bodyContent}
       footer={footerContent}
     />
-  )
+  );
 }
 
-export default RegisterModal
+export default RegisterModal;

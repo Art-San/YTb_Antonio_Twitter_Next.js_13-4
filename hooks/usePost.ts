@@ -1,12 +1,9 @@
-import useSWR from 'swr'
+import useSWR from 'swr';
 
-import fetcher from '@/libs/fetcher'
+import fetcher from '@/libs/fetcher';
 
 const usePost = (postId: string) => {
-  const { data, error, isLoading, mutate } = useSWR(
-    postId ? `/api/posts/${postId}` : null,
-    fetcher
-  )
+  const { data, error, isLoading, mutate } = useSWR(postId ? `/api/posts/${postId}` : null, fetcher);
 
   return {
     data,
@@ -14,6 +11,6 @@ const usePost = (postId: string) => {
     isLoading,
     mutate
   }
-}
+};
 
-export default usePost
+export default usePost;
