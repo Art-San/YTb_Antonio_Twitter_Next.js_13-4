@@ -1,8 +1,13 @@
-// import Image from 'next/image'
-// import { Inter } from 'next/font/google'
-
-// const inter = Inter({ subsets: ['latin'] })
+import PostFeed from '@/components/posts/PostFeed'
+import Header from '@/components/Header'
+import Form from '@/components/Form'
 
 export default function Home() {
-  return <div className=" text-3xl text-white">Hello World</div>
+  return (
+    <>
+      <Header label="Home" />
+      <Form placeholder="What's happening?" />
+      <PostFeed />
+    </>
+  )
 }
